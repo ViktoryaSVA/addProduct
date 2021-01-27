@@ -1,7 +1,9 @@
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('bypc','root','',{
+var argv = require('optimist').argv;
+
+var sequelize = new Sequelize(argv.db,argv.user,'',{
     dialect: "mysql",
-    host: "localhost",
+    host: argv.host,
     define: {
         freezeTableName: true,
         timestamps: false
@@ -135,8 +137,8 @@ var SimpleBlogArticleProduct = sequelize.define('oc_simple_blog_article_product_
 // START For oc_product
 sequelize.sync().then(function () {
     return Product.create({
-        product_id: 2,
-        model:"ProductTEST",
+        product_id: 5,
+        model:"ThirdProductTEST",
         sku:0,
         upc:0,
         ean:0,
@@ -183,13 +185,13 @@ sequelize.sync().then(function () {
 // LANGUAGE EN
 sequelize.sync().then(function () {
     return ProductDescription.create({
-        product_id: 2,
+        product_id: 5,
         language_id:1,
-        name:"New Product",
-        description:"NewProduct NewProduct NewProduct NewProduct NewProduct NewProduct NewProduct NewProduct",
+        name:"Third Product",
+        description:"Third Third Third Third Third Third",
         tag:0,
-        meta_title:"NewProduct",
-        meta_description:"TEST PRODUCT TEST PRODUCT TEST PRODUCT TEST PRODUCT",
+        meta_title:"ThirdProduct",
+        meta_description:"TEST Third TEST Third TEST Third TEST Third",
         meta_keyword:0
     });
 
@@ -205,12 +207,12 @@ sequelize.sync().then(function () {
 
 sequelize.sync().then(function () {
     return ProductDescription.create({
-        product_id: 2,
+        product_id: 5,
         language_id:2,
-        name:"Новий",
-        description:"Новий Продукт Новий Продукт Новий Продукт Новий Продукт Новий Продукт",
+        name:"Третій Продукт",
+        description:"Третій Продукт Третій Продукт Третій Продукт Третій Продукт Третій Продукт",
         tag:0,
-        meta_title:"NewProduct",
+        meta_title:"ThirdProduct",
         meta_description:"TEST PRODUCT TEST PRODUCT TEST PRODUCT TEST PRODUCT",
         meta_keyword:0
     });
@@ -228,12 +230,12 @@ sequelize.sync().then(function () {
 
 sequelize.sync().then(function () {
     return ProductDescription.create({
-        product_id: 2,
+        product_id: 5,
         language_id:3,
-        name:"Новий",
-        description:"Новий Продукт Новий Продукт Новий Продукт Новий Продукт",
+        name:"Третий продукт",
+        description:"Третий Продукт Третий Продукт Третий Продукт Третий Продукт",
         tag:0,
-        meta_title:"NewProduct",
+        meta_title:"ThirdProduct",
         meta_description:"TEST PRODUCT TEST PRODUCT TEST PRODUCT TEST PRODUCT",
         meta_keyword:0
     });
@@ -251,7 +253,7 @@ sequelize.sync().then(function () {
 // START For oc_product_to_category
 sequelize.sync().then(function () {
     return ProductToCategory.create({
-        product_id: 2,
+        product_id: 5,
         category_id:70
     });
 
@@ -268,8 +270,8 @@ sequelize.sync().then(function () {
 // START For oc_product_attribute
 sequelize.sync().then(function () {
     return ProductAttribute.create({
-        product_id: 2,
-        attribute_id:2,
+        product_id: 5,
+        attribute_id:5,
         language_id:2,
         text: 900
     });
@@ -287,11 +289,11 @@ sequelize.sync().then(function () {
 // START For oc_product_option
 sequelize.sync().then(function () {
     return ProductOption.create({
-        product_option_id: 2,
-        product_id:2,
-        option_id:2,
-        value: 2,
-        required:2
+        product_option_id: 4,
+        product_id:4,
+        option_id:4,
+        value:4,
+        required:4
     });
 
 }).then(function (ProductOption) {
@@ -308,11 +310,11 @@ sequelize.sync().then(function () {
 // START For oc_product_option_value
 sequelize.sync().then(function () {
     return ProductOptionValue.create({
-        product_option_value_id: 2,
-        product_option_id: 2,
-        product_id: 2,
-        option_id:2,
-        option_value_id:2,
+        product_option_value_id:5,
+        product_option_id:5,
+        product_id: 5,
+        option_id:5,
+        option_value_id:5,
         quantity: 900,
         subtract: 1,
         price:300.00,
@@ -337,10 +339,10 @@ sequelize.sync().then(function () {
 //START For oc_product_reward
 sequelize.sync().then(function () {
     return ProductOptionReward.create({
-        product_reward_id: 2,
-        product_id: 2,
-        customer_group_id:2,
-        points:2
+        product_reward_id:5,
+        product_id:5,
+        customer_group_id:5,
+        points:5
 
     });
 
@@ -357,9 +359,9 @@ sequelize.sync().then(function () {
 //START For oc_product_special
 sequelize.sync().then(function () {
     return ProductSpecial.create({
-        product_special_id:2,
-        product_id: 2,
-        customer_group_id:2,
+        product_special_id:5,
+        product_id:5,
+        customer_group_id:5,
         priority:0,
         price:9010.00,
         date_start: new Date().getTime(),
@@ -380,9 +382,9 @@ sequelize.sync().then(function () {
 //START For oc_product_to_layout
 sequelize.sync().then(function () {
     return ProductToLayout.create({
-        product_id: 2,
-        store_id:1,
-        layout_id:2
+        product_id:5,
+        store_id:5,
+        layout_id:5
 
     });
 
@@ -399,7 +401,7 @@ sequelize.sync().then(function () {
 //START For oc_product_to_store
 sequelize.sync().then(function () {
     return ProductToStore.create({
-        product_id: 2,
+        product_id: 5,
         store_id:0
     });
 
@@ -417,8 +419,8 @@ sequelize.sync().then(function () {
 //START For oc_product_image
 sequelize.sync().then(function () {
     return ProductImage.create({
-        product_image_id:2,
-        product_id: 2,
+        product_image_id:5,
+        product_id: 5,
         image: 'image',
         sort_order: 0
 
@@ -438,8 +440,8 @@ sequelize.sync().then(function () {
 //START For oc_simple_blog_article_product_related
 sequelize.sync().then(function () {
     return SimpleBlogArticleProduct.create({
-        simple_blog_article_id:2,
-        product_id: 2
+        simple_blog_article_id:5,
+        product_id: 5
     });
 
 }).then(function (SimpleBlogArticleProduct) {
