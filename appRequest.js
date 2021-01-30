@@ -26,7 +26,7 @@ async function Auth(){
 
     //AUTH GET
     let getProducts = await request.get({
-        url: 'http://api.brain.com.ua/products/7740/' + SID,
+        url: 'http://api.brain.com.ua/products/1285/' + SID,
         json: true,
         resolveWithFullResponse: true,
         simple: false

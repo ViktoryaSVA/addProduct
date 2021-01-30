@@ -3,7 +3,7 @@ var argv = require('optimist').argv;
 const request = require('request-promise');
 const md5 = require('md5');
 
-var sequelize = new Sequelize(argv.db,argv.user,'',{
+var sequelize = new Sequelize(argv.db,argv.user,'root',{
     dialect: "mysql",
     host: argv.host,
     define: {
@@ -41,7 +41,7 @@ async function Auth(){
     })
     //console.log(getRes.body.result);
     let getProducts = await request.get({
-        url: 'http://api.brain.com.ua/products/7740/' + SID,
+        url: 'http://api.brain.com.ua/products/1285/' + SID,
         json: true,
         resolveWithFullResponse: true,
         simple: false
@@ -195,7 +195,7 @@ async function Auth(){
 
 // END For oc_category_description
 
-// START For oc_category_to_stor
+// START For oc_category_to_store
     sequelize.sync().then(function () {
         return CategoryToStor.create({
             category_id: i.categoryID,
@@ -266,14 +266,25 @@ async function Auth(){
 
 }
     else if(argv.add == "product"){
-    require('./addProduct.js');
     let arr2 = getProducts.body.result.list;
     arr2.forEach(
-        function (i) {
-            //console.log(i.productID);
+        async function (i) {
+        var product = require('./testProd');
 
+         // product.Product;
+         // product.ProductDescription;
+         // product.ProductToCategory;
+         // product.ProductAttribute;
+         // product.ProductOption;
+         // product.ProductOptionValue;
+         // product.ProductOptionReward;
+         // product.ProductSpecial;
+         // product.ProductToLayout;
+         // product.ProductToStore;
+         // product.ProductImage;
+         // product.SimpleBlogArticleProduct;
 
-    var Product = sequelize.define('oc_product', {
+    var Product = await sequelize.define('oc_product', {
         product_id: { type: Sequelize.INTEGER, primaryKey: true},
         model: Sequelize.STRING,
         sku: Sequelize.STRING,
@@ -307,98 +318,98 @@ async function Auth(){
         date_modified:  { type: Sequelize.DATE, defaultValue: Sequelize.NOW }
 
     });
-
-    var ProductDescription = sequelize.define('oc_product_description', {
-        product_id: { type: Sequelize.INTEGER, primaryKey: true},
-        language_id: Sequelize.INTEGER,
-        name: Sequelize.STRING,
-        description: Sequelize.STRING,
-        tag: Sequelize.STRING,
-        meta_title: Sequelize.STRING,
-        meta_description: Sequelize.STRING,
-        meta_keyword: Sequelize.STRING
-    });
-    var ProductToCategory = sequelize.define('oc_product_to_category', {
-        product_id: { type: Sequelize.INTEGER, primaryKey: true},
-        category_id: Sequelize.INTEGER
-    });
-    var ProductAttribute = sequelize.define('oc_product_attribute', {
-        product_id: { type: Sequelize.INTEGER, primaryKey: true},
-        attribute_id: Sequelize.INTEGER,
-        language_id: Sequelize.INTEGER,
-        text: Sequelize.STRING
-
-    });
-    var ProductOption = sequelize.define('oc_product_option', {
-        product_option_id: { type: Sequelize.INTEGER, primaryKey: true},
-        product_id: Sequelize.INTEGER,
-        option_id: Sequelize.INTEGER,
-        value:Sequelize.INTEGER,
-        required: Sequelize.STRING
-
-    });
-    var ProductOptionValue = sequelize.define('oc_product_option_value', {
-        product_option_value_id: { type: Sequelize.INTEGER, primaryKey: true},
-        product_option_id: Sequelize.INTEGER,
-        product_id: Sequelize.INTEGER,
-        option_id:Sequelize.INTEGER,
-        option_value_id: Sequelize.INTEGER,
-        quantity: Sequelize.INTEGER,
-        subtract: Sequelize.INTEGER,
-        price:Sequelize.INTEGER,
-        price_prefix: Sequelize.STRING,
-        points:Sequelize.INTEGER,
-        points_prefix: Sequelize.STRING,
-        weight:Sequelize.INTEGER,
-        weight_prefix: Sequelize.STRING
-
-
-    });
-    var ProductOptionReward = sequelize.define('oc_product_reward', {
-        product_reward_id: { type: Sequelize.INTEGER, primaryKey: true},
-        product_id: Sequelize.INTEGER,
-        customer_group_id:Sequelize.INTEGER,
-        points:Sequelize.INTEGER
-
-    });
-    var ProductSpecial = sequelize.define('oc_product_special', {
-        product_special_id: { type: Sequelize.INTEGER, primaryKey: true},
-        product_id: Sequelize.INTEGER,
-        customer_group_id:Sequelize.INTEGER,
-        points:Sequelize.INTEGER,
-        priority:Sequelize.INTEGER,
-        price:Sequelize.INTEGER,
-        date_start: { type: Sequelize.DATE, defaultValue: Sequelize.NOW },
-        date_end: { type: Sequelize.DATE, defaultValue: Sequelize.NOW }
-
-    });
-    var ProductToLayout = sequelize.define('oc_product_to_layout', {
-        product_id: { type: Sequelize.INTEGER, primaryKey: true},
-        store_id: Sequelize.INTEGER,
-        layout_id: Sequelize.INTEGER
-
-    });
-    var ProductToStore = sequelize.define('oc_product_to_store', {
-        product_id: { type: Sequelize.INTEGER, primaryKey: true},
-        store_id: Sequelize.INTEGER
-
-    });
-    var ProductImage = sequelize.define('oc_product_image', {
-        product_image_id: { type: Sequelize.INTEGER, primaryKey: true},
-        product_id: Sequelize.INTEGER,
-        image: Sequelize.STRING,
-        sort_order: Sequelize.INTEGER
-
-
-    });
-    var SimpleBlogArticleProduct = sequelize.define('oc_simple_blog_article_product_related', {
-        simple_blog_article_id: { type: Sequelize.INTEGER, primaryKey: true},
-        product_id: Sequelize.INTEGER
-
-    });
+    //
+    // var ProductDescription = sequelize.define('oc_product_description', {
+    //     product_id: { type: Sequelize.INTEGER, primaryKey: true},
+    //     language_id: Sequelize.INTEGER,
+    //     name: Sequelize.STRING,
+    //     description: Sequelize.STRING,
+    //     tag: Sequelize.STRING,
+    //     meta_title: Sequelize.STRING,
+    //     meta_description: Sequelize.STRING,
+    //     meta_keyword: Sequelize.STRING
+    // });
+    // var ProductToCategory = sequelize.define('oc_product_to_category', {
+    //     product_id: { type: Sequelize.INTEGER, primaryKey: true},
+    //     category_id: Sequelize.INTEGER
+    // });
+    // var ProductAttribute = sequelize.define('oc_product_attribute', {
+    //     product_id: { type: Sequelize.INTEGER, primaryKey: true},
+    //     attribute_id: Sequelize.INTEGER,
+    //     language_id: Sequelize.INTEGER,
+    //     text: Sequelize.STRING
+    //
+    // });
+    // var ProductOption = sequelize.define('oc_product_option', {
+    //     product_option_id: { type: Sequelize.INTEGER, primaryKey: true},
+    //     product_id: Sequelize.INTEGER,
+    //     option_id: Sequelize.INTEGER,
+    //     value:Sequelize.INTEGER,
+    //     required: Sequelize.STRING
+    //
+    // });
+    // var ProductOptionValue = sequelize.define('oc_product_option_value', {
+    //     product_option_value_id: { type: Sequelize.INTEGER, primaryKey: true},
+    //     product_option_id: Sequelize.INTEGER,
+    //     product_id: Sequelize.INTEGER,
+    //     option_id:Sequelize.INTEGER,
+    //     option_value_id: Sequelize.INTEGER,
+    //     quantity: Sequelize.INTEGER,
+    //     subtract: Sequelize.INTEGER,
+    //     price:Sequelize.INTEGER,
+    //     price_prefix: Sequelize.STRING,
+    //     points:Sequelize.INTEGER,
+    //     points_prefix: Sequelize.STRING,
+    //     weight:Sequelize.INTEGER,
+    //     weight_prefix: Sequelize.STRING
+    //
+    //
+    // });
+    // var ProductOptionReward = sequelize.define('oc_product_reward', {
+    //     product_reward_id: { type: Sequelize.INTEGER, primaryKey: true},
+    //     product_id: Sequelize.INTEGER,
+    //     customer_group_id:Sequelize.INTEGER,
+    //     points:Sequelize.INTEGER
+    //
+    // });
+    // var ProductSpecial = sequelize.define('oc_product_special', {
+    //     product_special_id: { type: Sequelize.INTEGER, primaryKey: true},
+    //     product_id: Sequelize.INTEGER,
+    //     customer_group_id:Sequelize.INTEGER,
+    //     points:Sequelize.INTEGER,
+    //     priority:Sequelize.INTEGER,
+    //     price:Sequelize.INTEGER,
+    //     date_start: { type: Sequelize.DATE, defaultValue: Sequelize.NOW },
+    //     date_end: { type: Sequelize.DATE, defaultValue: Sequelize.NOW }
+    //
+    // });
+    // var ProductToLayout = sequelize.define('oc_product_to_layout', {
+    //     product_id: { type: Sequelize.INTEGER, primaryKey: true},
+    //     store_id: Sequelize.INTEGER,
+    //     layout_id: Sequelize.INTEGER
+    //
+    // });
+    // var ProductToStore = sequelize.define('oc_product_to_store', {
+    //     product_id: { type: Sequelize.INTEGER, primaryKey: true},
+    //     store_id: Sequelize.INTEGER
+    //
+    // });
+    // var ProductImage = sequelize.define('oc_product_image', {
+    //     product_image_id: { type: Sequelize.INTEGER, primaryKey: true},
+    //     product_id: Sequelize.INTEGER,
+    //     image: Sequelize.STRING,
+    //     sort_order: Sequelize.INTEGER
+    //
+    //
+    // });
+    // var SimpleBlogArticleProduct = sequelize.define('oc_simple_blog_article_product_related', {
+    //     simple_blog_article_id: { type: Sequelize.INTEGER, primaryKey: true},
+    //     product_id: Sequelize.INTEGER
+    //
+    // });
 // START For oc_product
-    sequelize.sync().then(function () {
-        return Product.create({
+    sequelize.sync().then(async function () {
+        return await Product.create({
             product_id: i.productID,
             model:i.articul,
             sku:i.product_code,
@@ -516,7 +527,7 @@ async function Auth(){
     sequelize.sync().then(function () {
         return ProductToCategory.create({
             product_id: i.productID,
-            category_id: 7740
+            category_id: 1285
         });
 
     }).then(function (ProductToCategory) {
